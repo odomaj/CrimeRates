@@ -5,4 +5,8 @@ cat("\f")
 rm(list = ls())
 
 # retrieve data from the scv file
-data <- read.csv("communities.csv")
+all_data <- read.csv("communities.csv")
+
+fit_mlr <- lm(ViolentCrimesPerPop ~ PopDens + medIncome + PctUnemployed, data = all_data)
+
+print(summary(fit_mlr))
