@@ -49,7 +49,7 @@ drop <- TRUE
 while(drop == TRUE){
     f <- ""
     vfit <- vif(model)
-    if (max(vfit) > 5){
+    if (max(vfit) > 2){
         badVars <- c(badVars, names(which.max(vfit)))
         for(col in colnames(all_data)){
             add <- TRUE
@@ -84,4 +84,5 @@ while(drop == TRUE){
 step_model <- stepAIC(model, direction = "both", trace = FALSE)
 summary(step_model)
 vfit <- vif(step_model)
+print("VIF values")
 print(vfit)
