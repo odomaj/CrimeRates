@@ -1,6 +1,7 @@
 library(carData)
 library(car)
 library(MASS)
+library(ggplot2)
 
 # clean the console
 cat("\f")
@@ -83,9 +84,6 @@ summary(step_model)
 vfit <- vif(step_model)
 print("VIF values")
 print(vfit)
-
-#load ggplot2
-library(ggplot2)
 
 #create histogram of residuals
 ggplot(data = all_data, aes(x = step_model$residuals)) +
