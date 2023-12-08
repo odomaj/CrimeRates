@@ -53,17 +53,13 @@ while(drop == TRUE){
         badVars <- c(badVars, names(which.max(vfit)))
         for(col in colnames(all_data)){
             add <- TRUE
-            for(var in badVars)
-            {
-                if(col == var)
-                {
+            for(var in badVars){
+                if(col == var){
                     add <- FALSE
                 }
             }
-            if(add == TRUE)
-            {
-                if(f == "")
-                {
+            if(add == TRUE){
+                if(f == ""){
                     f <- col;
                 }
                 else{
@@ -74,7 +70,7 @@ while(drop == TRUE){
         f <- paste("ViolentCrimesPerPop ~ ", f)
         model <- lm(as.formula(f), data = all_data)
     }
-    else {
+    else{
        drop = FALSE
     }
 }
@@ -82,7 +78,16 @@ while(drop == TRUE){
 # perform stepwise linear regression on the model
 # then find the vif values of the remaining variables
 step_model <- stepAIC(model, direction = "both", trace = FALSE)
+summary(model)
 summary(step_model)
 vfit <- vif(step_model)
 print("VIF values")
 print(vfit)
+
+#load ggplot2
+library(ggplot2)
+
+#create histogram of residuals
+ggplot(data = all_data, aes(x = step_model$residuals)) +
+    geom_histogram(fill = 'steelblue', color = 'black') +
+    labs(title = 'Histogram of Residuals', x = 'Residuals', y = 'Frequency')
