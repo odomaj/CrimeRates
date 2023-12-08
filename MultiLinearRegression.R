@@ -3,6 +3,8 @@ library(car)
 library(MASS)
 library(ggplot2)
 
+#setwd()
+
 # clean the console
 cat("\f")
 
